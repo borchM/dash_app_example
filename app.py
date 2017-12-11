@@ -37,7 +37,7 @@ available_countries = euro_data['GEO'].unique()
 # In[ ]:
 
 
-app = dash.Dash(_name_)
+app = dash.Dash(__name__)
 server= aap.server
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
