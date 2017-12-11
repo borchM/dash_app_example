@@ -38,7 +38,7 @@ available_countries = euro_data['GEO'].unique()
 
 
 app = dash.Dash(__name__)
-server= aap.server
+server= app.server
 app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
 euro_data1 = euro_data[euro_data['UNIT'] == 'Current prices, million euro']
