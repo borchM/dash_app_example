@@ -2,19 +2,19 @@
 # coding: utf-8
 
 # # Final Project
-# 
-# Create a Dashboard taking data from [Eurostat, GDP and main components (output, expenditure and income)](http://ec.europa.eu/eurostat/web/products-datasets/-/nama_10_gdp). 
-# 
-# The dashboard will have two graphs: 
-# 
-# The first one will be a scatterplot with two DropDown boxes for the different indicators. It will have also a slide for the different years in the data. 
+#
+# Create a Dashboard taking data from [Eurostat, GDP and main components (output, expenditure and income)](http://ec.europa.eu/eurostat/web/products-datasets/-/nama_10_gdp).
+#
+# The dashboard will have two graphs:
+#
+# The first one will be a scatterplot with two DropDown boxes for the different indicators. It will have also a slide for the different years in the data.
 # The other graph will be a line chart with two DropDown boxes, one for the country and the other for selecting one of the indicators.
-# 
+#
 
 # In[3]:
 
 import dash
-from dash.dependencies import Input, Output 
+from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
@@ -25,7 +25,7 @@ import plotly.graph_objs as go
 
 #First we import the files and create the coresponding indicators for the values and the countries
 
-euro_data = pd.read_csv("/Users/borjamerodio/Downloads/nama_10_gdp_1_Data_aaa.csv")
+euro_data = pd.read_csv("nama_10_gdp_1_Data_aaa.csv")
 
 available_indicators = euro_data['NA_ITEM'].unique()
 
@@ -44,12 +44,12 @@ app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"
 euro_data1 = euro_data[euro_data['UNIT'] == 'Current prices, million euro']
 
 app.layout = html.Div([
-    
+
 
     html.Div([
 
         html.Div([
-            dcc.Dropdown( 
+            dcc.Dropdown(
 
                 id='xaxis-column1',
                 options=[{'label': i, 'value': i} for i in available_indicators],
@@ -59,7 +59,7 @@ app.layout = html.Div([
         style={'width': '30%', 'display': 'inline-block'}),
 
         html.Div([
-            dcc.Dropdown( 
+            dcc.Dropdown(
                 id='yaxis-column1',
                 options=[{'label': i, 'value': i} for i in available_indicators],
                 value='Wages and salaries'
@@ -70,21 +70,21 @@ app.layout = html.Div([
 
     dcc.Graph(id='grph1'),
 
-    html.Div(dcc.Slider( 
+    html.Div(dcc.Slider(
         id='year--slider',
         min=euro_data['TIME'].min(),
         max=euro_data['TIME'].max(),
         value=euro_data['TIME'].max(),
         step=None,
         marks={str(time): str(time) for time in euro_data['TIME'].unique()},
-    
+
     ), style={'marginRight': 50, 'marginLeft': 110},),
 
 
     html.Div([
-        
+
         html.Div([
-            dcc.Dropdown( 
+            dcc.Dropdown(
 
                 id='xaxis-column2',
                 options=[{'label': i, 'value': i} for i in available_indicators],
@@ -94,11 +94,11 @@ app.layout = html.Div([
         style={'width': '30%', 'marginTop': 40, 'display': 'inline-block'}),
 
         html.Div([
-            dcc.Dropdown( 
+            dcc.Dropdown(
                 id='yaxis-column2',
                 options=[{'label': i, 'value': i} for i in available_countries],
                 value= "Spain"
-                
+
             )
         ],style={'width': '30%', 'marginTop': 40, 'float': 'right', 'display': 'inline-block'})
      ]),
@@ -189,6 +189,3 @@ if __name__ == '__main__':
 
 
 # In[ ]:
-
-
-
